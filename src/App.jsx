@@ -400,7 +400,21 @@ export default function App() {
 		3. Görevi tamamladığınızda, hapishanenin sınırları içinde kalırken ekrandaki yön tuşlarını veya klavyenizdeki ok tuşlarını kullanarak Pookachu'yu herhangi bir yöne hareket ettirebilmelisiniz. Ayrıca A ve B tuşlarını kullanarak kapıyı patlatırsanız hapishaneden kaçabilmeniz gerekiyor
 */
 
-  function updatePosition() {}
+  function updatePosition() {
+    if(pookachu.wantsToMove) {
+      setPookachu((prev) => {
+        if(prev.direction === "right" && prev.xPosition < boundaries.xAxis.max) {
+          prev.xPosition += 1} else if(prev.direction === "left" && prev.xPosition > boundaries.xAxis.min) {
+            prev.xPosition -= 1
+          } else if(prev.direction === "down" && prev.yPosition < boundaries.yAxis.max) {
+            prev.yPosition += 1
+          } else if(prev.direction === "up" && prev.yPosition > boundaries.yAxis.min) {
+            prev.yPosition -= 1
+          }
+          return {...prev, xPosition:prev.xPosition, yPosition:prev.yPosition}
+      })
+    }
+  }
 
   return (
     <div
